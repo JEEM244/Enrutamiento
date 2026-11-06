@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+h3 {
+  margin-bottom: 0.55rem;
+  color: #e6edf3;
+  font-family: var(--pixel);
+  font-size: 1rem;
+}
+
+h3:first-child::before {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--green);
+  content: "ITEM DATABASE  /  PRODUCTS";
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+p {
+  max-width: 720px;
+  margin-bottom: 1rem;
+  color: var(--fg-dim);
+}

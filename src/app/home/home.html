@@ -1,0 +1,15 @@
+<div class="container home-page">
+
+  <h1 class="page-title">Página Principal</h1>
+
+  <p class="home-intro">Bienvenido a la Home Page</p>
+
+  <ul class="id-list">
+    <li *ngFor="let id of [1, 2, 3, 4, 5]">
+      <a class="id-link" [routerLink]="['/details', id]">
+        Ir a detalles del ID: #{{id}}
+      </a>
+    </li>
+  </ul>
+
+</div>

@@ -1,0 +1,67 @@
+:host {
+  display: block;
+  max-width: 920px;
+  animation: pixel-enter 240ms steps(4, end) both;
+}
+
+.admin-page {
+  padding-left: clamp(0.8rem, 2.5vw, 1.4rem);
+  border-left: 3px solid var(--line-lit);
+}
+
+.admin-title {
+  margin-bottom: 1.3rem;
+  color: #e6edf3;
+  font-family: var(--pixel);
+  font-size: clamp(1.3rem, 3.7vw, 1.85rem);
+  letter-spacing: -0.07em;
+}
+
+.admin-title::before {
+  display: block;
+  margin-bottom: 0.7rem;
+  color: var(--green);
+  content: "PRACTICE MODE  /  MENU";
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.45rem 0.45rem 0;
+  border: 1px solid var(--line);
+  border-bottom: 2px solid var(--line-lit);
+  background: var(--screen-raised);
+}
+
+.admin-tabs a {
+  position: relative;
+  display: block;
+  margin-bottom: -2px;
+  padding: 0.55rem 0.8rem;
+  border: 2px solid transparent;
+  border-bottom-color: var(--line-lit);
+  color: var(--fg-dim);
+  font-family: var(--pixel);
+  font-size: 0.74rem;
+  text-decoration: none;
+}
+
+.admin-tabs a:hover {
+  color: var(--blue);
+}
+
+.admin-tabs a.active {
+  border-color: var(--line-lit);
+  border-bottom-color: var(--screen);
+  background: var(--screen);
+  color: var(--green);
+}
+
+.admin-content {
+  min-height: 285px;
+  padding: 1.4rem 0.2rem;
+}

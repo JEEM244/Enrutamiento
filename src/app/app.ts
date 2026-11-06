@@ -1,10 +1,12 @@
 import { Component, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
-  standalone: false,
-  styleUrl: './app.css'
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('Enrutamiento');

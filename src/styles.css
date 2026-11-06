@@ -1,1 +1,142 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  color-scheme: dark;
+  --screen: #0d1117;
+  --screen-raised: #161b22;
+  --screen-bright: #202832;
+  --line: #303943;
+  --line-lit: #526170;
+  --fg: #d7dee6;
+  --fg-dim: #929eaa;
+  --blue: #58a6ff;
+  --blue-dark: #1f6feb;
+  --green: #63d471;
+  --green-dark: #238636;
+  --gold: #f0c674;
+  --pixel: "Courier New", Consolas, monospace;
+  --ui: "Segoe UI", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: var(--screen);
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  isolation: isolate;
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse at 18% 22%, rgb(35 134 54 / 11%), transparent 34rem),
+    radial-gradient(ellipse at 82% 76%, rgb(31 111 235 / 9%), transparent 30rem),
+    var(--screen);
+  color: var(--fg);
+  font-family: var(--ui);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+app-root {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--blue);
+}
+
+a:focus-visible {
+  outline: 2px dashed var(--gold);
+  outline-offset: 4px;
+}
+
+h1,
+h2,
+h3 {
+  color: #e6edf3;
+  line-height: 1.3;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+@keyframes pixel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#customers {
+  width: 100%;
+  margin: 0.85rem 0 0;
+  border: 2px solid var(--line-lit);
+  border-collapse: collapse;
+  background: var(--screen);
+  color: var(--fg);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+#customers th,
+#customers td {
+  padding: 0.68rem 0.9rem;
+  border: 1px solid var(--line);
+}
+
+#customers th {
+  background: var(--screen-bright);
+  color: #a5d6ff;
+  font-family: var(--pixel);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+#customers tr:not(:first-child) {
+  transition: background-color 120ms steps(2, end);
+}
+
+#customers tr:not(:first-child):hover {
+  background: #18251c;
+}
+
+#customers td:first-child {
+  color: var(--green);
+  font-family: var(--pixel);
+}
+
+@media (max-width: 560px) {
+  #customers th,
+  #customers td {
+    padding: 0.55rem 0.45rem;
+    font-size: 0.81rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
