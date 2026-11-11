@@ -185,3 +185,31 @@ nav a.active::before {
     border-left: 0;
   }
 }
+
+
+/* Botón para visitar el perfil del desarrollador. */
+nav a.github-link {
+  margin-left: auto;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--green);
+  color: var(--green);
+  background: rgb(99 212 113 / 7%);
+  font-size: 0.75rem;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+nav a.github-link:hover {
+  color: #0d1117;
+  background: var(--green);
+}
+
+@media (max-width: 560px) {
+  nav {
+    gap: 1rem;
+  }
+
+  nav a.github-link {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.68rem;
+  }
+}
