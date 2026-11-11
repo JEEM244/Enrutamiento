@@ -1,135 +1,151 @@
-# Proyecto de Enrutamiento
+# Enrutamiento
 
-## ¿De qué trata este proyecto?
+Esta es una página web hecha como práctica de **enrutamiento con Angular**. La página permite cambiar entre distintas pantallas usando los enlaces del menú y también abrir una pantalla de detalles enviándole un número en la dirección web.
 
-Este proyecto es una página web creada con **Angular**. Su objetivo principal es mostrar cómo se puede navegar entre diferentes secciones de una página sin tener que recargar todo el sitio cada vez que se cambia de pantalla.
+El proyecto está organizado alrededor de tres partes que se pueden probar desde el navegador: **Home**, **Details** y **Admin**. En Admin hay dos apartados: usuarios y productos.
 
-A esta forma de organizar la navegación se le conoce como **enrutamiento**. Por ejemplo, desde la página principal podemos entrar a la sección de administración o abrir una pantalla que muestra un número de identificación.
+## 1. ¿Qué aparece al abrir la página?
 
-El proyecto también incluye ejemplos de listas de usuarios y productos, además de un enlace con el logo de GitHub que lleva al perfil del desarrollador.
+Al entrar al proyecto, la dirección inicial `/` envía automáticamente a `/home`. Ahí se muestra la página principal.
 
-## Herramientas utilizadas
+En la parte superior hay una barra de navegación con estos elementos:
 
-- **Angular:** herramienta que usamos para construir la página y organizarla en secciones.
-- **TypeScript:** lenguaje en el que se escribe la parte que controla el funcionamiento de cada sección.
-- **HTML:** se utiliza para colocar los títulos, textos, enlaces, tablas y demás elementos que aparecen en pantalla.
-- **CSS:** sirve para dar color, tamaño, espacios y apariencia a la página.
-- **Node.js y npm:** permiten instalar y utilizar las herramientas necesarias para ejecutar el proyecto.
+- **Home:** regresa a la página principal.
+- **Admin:** abre la sección de administración.
+- **Logo de GitHub:** abre el perfil del desarrollador en otra pestaña: [github.com/JEEM244](https://github.com/JEEM244).
 
-## ¿Cómo se organizó la página?
+Debajo de la barra se muestra el contenido de la pantalla seleccionada. La página no necesita crear un sitio distinto para cada dirección: Angular cambia el componente que aparece en el espacio reservado para el contenido.
 
-La página está dividida en varias partes. Cada parte tiene una tarea específica:
+## 2. Pantallas y cómo probarlas
 
-### 1. Página principal (Home)
+### Home: página principal
 
-Es la primera pantalla que aparece al entrar al sitio. Tiene un título de bienvenida y una lista con cinco enlaces.
+La pantalla Home muestra el título “Página Principal”, un mensaje de bienvenida y cinco enlaces numerados del 1 al 5.
 
-Cada enlace tiene un número diferente. Al seleccionar uno, se abre la pantalla de detalles y se envía ese número en la dirección de la página.
-
-### 2. Página de detalles
-
-Esta pantalla recibe el número que se seleccionó desde Home.
-
-Por ejemplo, si se selecciona el enlace del número 3, la dirección queda así:
+Cada enlace lleva a la pantalla Details y le envía el número seleccionado. Por ejemplo, al elegir el número 3, la dirección cambia a:
 
 `/details/3`
 
-El archivo `details.ts` obtiene ese número de la dirección y lo guarda para mostrarlo en pantalla. De esta manera, una misma pantalla puede mostrar diferentes números sin tener que crear una página nueva para cada uno.
+Esto permite probar una ruta que recibe un dato desde la dirección web.
 
-### 3. Sección de administración (Admin)
+### Details: pantalla de detalles
 
-Esta sección tiene dos apartados:
+Details muestra el número que se recibió desde Home. Si se abrió `/details/3`, la pantalla presenta el ID **3**.
 
-- **Administrar Usuarios:** muestra una tabla de ejemplo con el ID, nombre y teléfono de varios usuarios.
-- **Administrar Productos:** muestra una tabla de ejemplo con el nombre, precio y existencia de algunos productos.
+El archivo `details.ts` obtiene el valor de la dirección usando `ActivatedRoute`. Después lo convierte a número y lo guarda en la variable `id`. El archivo `details.html` utiliza esa variable para mostrarla en pantalla.
 
-Estas tablas sirven para demostrar cómo se pueden organizar los datos. Por el momento, la información está escrita directamente en los archivos HTML. No está conectada a una base de datos y tampoco permite agregar, editar o eliminar registros.
+En la parte inferior también aparece un texto que explica que ese ID podría utilizarse para buscar un registro en una base de datos. **En este proyecto solo se muestra el número: todavía no se realiza ninguna consulta SQL ni se conecta una base de datos.**
 
-### 4. Enlace al perfil de GitHub
+### Admin: sección de administración
 
-En la barra superior se agregó un botón que muestra únicamente el logo de GitHub. Al seleccionarlo, abre el perfil del desarrollador en otra pestaña.
+Admin tiene dos enlaces internos:
 
-## ¿Qué es el enrutamiento y cómo funciona aquí?
+- **Administrar Usuarios:** abre la ruta `/admin/users`.
+- **Administrar Productos:** abre la ruta `/admin/products`.
 
-El enrutamiento es la parte que decide qué pantalla debe mostrarse dependiendo de la dirección que se visite.
+Al seleccionar uno de ellos, el contenido correspondiente aparece dentro de la sección Admin. La barra de opciones permanece visible para poder cambiar entre las dos listas.
 
-En este proyecto, las rutas se encuentran en el archivo `src/app/app.routes.ts`.
+**Lista de usuarios**
 
-Las rutas principales son:
+La pantalla muestra una tabla de ejemplo con tres columnas: ID, nombre y teléfono. Los registros están escritos directamente en el archivo HTML.
 
-| Dirección | ¿Qué muestra? |
+**Lista de productos**
+
+La pantalla muestra otra tabla de ejemplo con tres columnas: producto, precio y stock. También contiene tres registros escritos directamente en el HTML.
+
+Estas dos pantallas sirven para demostrar cómo se pueden mostrar diferentes contenidos dentro de una ruta. No son todavía un sistema CRUD: no permiten registrar, modificar ni eliminar información, y los datos no se guardan en una base de datos.
+
+## 3. Direcciones que tiene el proyecto
+
+Estas son las rutas configuradas en `src/app/app.routes.ts`:
+
+| Dirección | Qué sucede |
 |---|---|
-| `/` | Redirige automáticamente a Home. |
-| `/home` | Muestra la página principal. |
-| `/details/3` | Muestra los detalles y recibe el número 3 como ejemplo. |
-| `/admin` | Abre la sección de administración. |
-| `/admin/users` | Muestra la lista de usuarios. |
-| `/admin/products` | Muestra la lista de productos. |
+| `/` | Redirige a `/home`. |
+| `/home` | Abre la página principal con los cinco enlaces de ID. |
+| `/details/1` a `/details/5` | Abre Details y muestra el número indicado en la dirección. |
+| `/admin` | Abre la sección Admin y sus opciones. |
+| `/admin/users` | Muestra la tabla de usuarios dentro de Admin. |
+| `/admin/products` | Muestra la tabla de productos dentro de Admin. |
 
-Las rutas de usuarios y productos están dentro de Admin. Esto significa que primero se entra a la sección de administración y después se elige cuál de sus apartados se quiere abrir.
+Las rutas `users` y `products` están declaradas como rutas hijas de `admin`. Por eso sus direcciones comienzan con `/admin/` y su contenido se muestra dentro del espacio de navegación de Admin.
 
-Angular utiliza algunos elementos para hacer posible esta navegación:
+## 4. ¿Cómo se realiza la navegación?
 
-- **RouterLink:** se coloca en los enlaces para indicar a qué dirección deben llevar.
-- **RouterOutlet:** marca el espacio donde Angular muestra la pantalla que corresponde a la dirección actual.
-- **RouterLinkActive:** permite identificar cuándo un enlace corresponde a la sección que está abierta.
-- **ActivatedRoute:** permite leer información de la dirección actual, como el número que se envía a la pantalla de detalles.
+La navegación se configura principalmente en dos archivos:
 
-## ¿Cómo se construyó?
+- **`app.routes.ts`:** contiene la lista de direcciones y el componente que debe mostrarse en cada una.
+- **`app.config.ts`:** registra esas rutas en Angular mediante `provideRouter(routes)`.
 
-El desarrollo se realizó por partes:
+También se utilizan estos elementos:
 
-1. **Se creó el proyecto:** se utilizó Angular para preparar la estructura inicial de la página.
-2. **Se organizaron las pantallas:** se separaron Home, Admin, Details, UserList y ProductList. Cada una tiene sus propios archivos.
-3. **Se configuraron las rutas:** se indicó qué pantalla debe abrirse para cada dirección.
-4. **Se agregaron los enlaces:** desde Home se puede entrar a los detalles de un número y desde Admin se puede cambiar entre usuarios y productos.
-5. **Se prepararon las tablas:** se colocaron datos de ejemplo para representar las listas de usuarios y productos.
-6. **Se trabajó el diseño:** con CSS se definieron los colores, fondos, tamaños, bordes y espacios. Se utilizó un estilo oscuro con detalles verdes y azules.
-7. **Se agregó el acceso a GitHub:** se colocó el logo en la barra superior y se configuró para abrir el perfil en otra pestaña.
+- **`RouterLink`:** conecta un enlace con una ruta de Angular. Por ejemplo, los enlaces de Home lo usan para abrir Details con el ID elegido.
+- **`RouterLinkActive`:** agrega la clase `active` al enlace que corresponde a la ruta actual. Se usa en la navegación superior y en las opciones de Admin.
+- **`RouterOutlet`:** indica el espacio donde Angular debe mostrar el componente de la ruta. Hay uno en la estructura principal y otro dentro de Admin para mostrar las listas.
+- **`ActivatedRoute`:** permite leer el parámetro `id` de la dirección en la pantalla Details.
 
-## Archivos principales del proyecto
+Un ejemplo del recorrido es: entrar a Home, seleccionar el enlace del ID 3 y llegar a `/details/3`. Angular reconoce esa dirección, carga el componente Details y este lee el número 3 para mostrarlo.
 
-| Archivo o carpeta | Para qué sirve |
+## 5. Organización de los archivos
+
+Los archivos de cada pantalla están separados para que sea más fácil encontrar qué parte controla su contenido y su funcionamiento.
+
+| Archivo o carpeta | Qué contiene |
 |---|---|
-| `src/app/app.html` | Contiene la estructura general y la barra de navegación. |
-| `src/app/app.ts` | Define el componente principal de la aplicación. |
-| `src/app/app.css` | Contiene los estilos de la estructura principal. |
-| `src/app/app.routes.ts` | Guarda las direcciones y las pantallas que se abren en cada una. |
-| `src/app/app.config.ts` | Configura Angular para que pueda utilizar las rutas. |
-| `src/app/home/` | Contiene los archivos de la página principal. |
-| `src/app/details/` | Contiene los archivos de la pantalla de detalles. |
-| `src/app/admin/` | Contiene la sección de administración y sus apartados. |
-| `src/styles.css` | Guarda los estilos generales que se aplican en toda la página. |
+| `src/app/app.html` | La barra superior, los enlaces Home y Admin, el logo de GitHub y el espacio principal donde se muestran las pantallas. |
+| `src/app/app.ts` | El componente principal y los elementos de navegación que utiliza. |
+| `src/app/app.css` | El diseño de la estructura principal, la barra superior, el fondo animado y el botón de GitHub. |
+| `src/app/app.routes.ts` | Todas las rutas del proyecto y las rutas hijas de Admin. |
+| `src/app/app.config.ts` | La configuración que activa el enrutamiento. |
+| `src/app/home/` | Los archivos de Home. Su HTML contiene los cinco enlaces y su TypeScript permite utilizar RouterLink. |
+| `src/app/details/` | Los archivos de Details. Su TypeScript lee el ID de la dirección y su HTML lo muestra. |
+| `src/app/admin/` | Los archivos de la sección Admin y sus enlaces internos. |
+| `src/app/admin/user-list/` | Los archivos de la tabla de usuarios. |
+| `src/app/admin/product-list/` | Los archivos de la tabla de productos. |
+| `src/styles.css` | Los estilos generales, colores, tipografía y apariencia de las tablas. |
 
-En las carpetas de las pantallas se encuentran archivos con distintas funciones. Los archivos HTML contienen lo que se muestra; los archivos TypeScript controlan su funcionamiento y los archivos CSS definen su apariencia.
+En cada pantalla, el archivo HTML contiene los elementos que aparecen en el navegador. El archivo TypeScript controla la parte de funcionamiento y el CSS define la apariencia de esa pantalla.
 
-## ¿Cómo ejecutar el proyecto?
+## 6. Diseño de la página
 
-Para abrir el proyecto en una computadora se necesita tener instalado **Node.js**. Después, sigue estos pasos:
+El diseño utiliza un fondo oscuro y detalles en verde y azul. La barra de navegación tiene los enlaces principales y el logo de GitHub queda separado a la derecha.
 
-1. Abre una terminal dentro de la carpeta del proyecto.
-2. Instala las dependencias con este comando:
+El fondo incluye una cuadrícula y pequeños elementos de estilo pixel que tienen movimiento. Las tablas de usuarios y productos utilizan bordes, encabezados destacados y un cambio de fondo cuando se pasa el cursor sobre una fila.
 
-```bash
-npm install
-```
+Los colores principales están definidos como variables en `src/styles.css`. Esto permite reutilizarlos en diferentes partes de la página sin escribir el mismo valor en cada archivo.
 
-3. Cuando termine la instalación, inicia el servidor de desarrollo:
+## 7. Herramientas utilizadas
 
-```bash
-ng serve -o
-```
+- **Angular:** se utilizó para crear las pantallas y controlar la navegación entre ellas.
+- **TypeScript:** contiene la lógica de los componentes, como la lectura del ID en Details.
+- **HTML:** define los títulos, enlaces, textos y tablas que aparecen en cada pantalla.
+- **CSS:** controla los colores, tamaños, espacios, bordes y animaciones.
+- **Node.js y npm:** permiten instalar las dependencias y ejecutar el proyecto.
 
-4. Angular abrirá el proyecto en el navegador. Si no se abre automáticamente, entra a:
+## 8. Cómo ejecutar el proyecto
 
-`http://localhost:4200/`
+Para abrirlo en otra computadora se necesita instalar [Node.js](https://nodejs.org/).
 
-Mientras el servidor esté funcionando, los cambios que se guarden en los archivos se reflejarán en el navegador.
+1. Descarga o clona el repositorio.
+2. Abre una terminal dentro de la carpeta del proyecto.
+3. Instala las dependencias:
 
-Para detener el servidor, vuelve a la terminal y presiona `Ctrl + C`.
+   ```bash
+   npm install
+   ```
 
-## Conclusión
+4. Inicia el servidor de desarrollo:
 
-Con este proyecto se puso en práctica el uso de rutas para separar una página web en diferentes pantallas y permitir que el usuario pueda moverse entre ellas. También se trabajó con componentes, enlaces, tablas y estilos para organizar mejor el sitio.
+   ```bash
+   npm start
+   ```
 
-El proyecto funciona como una demostración de enrutamiento en Angular. Las listas de usuarios y productos todavía utilizan datos de ejemplo, pero la estructura permite tomar como base este trabajo para después conectarlo a una base de datos y agregar funciones para administrar la información.
+5. Abre en el navegador la dirección que indique la terminal. Normalmente es `http://localhost:4200/`.
+
+Para detener el servidor, regresa a la terminal y presiona `Ctrl + C`.
+
+## 9. Resultado del proyecto
+
+La página permite comprobar cómo se configuran y utilizan diferentes rutas en Angular. Desde Home se puede abrir una pantalla de detalles enviando un ID, y desde Admin se puede cambiar entre dos listas que se muestran dentro de la misma sección.
+
+El objetivo principal es practicar la navegación entre componentes y el uso de parámetros en las direcciones. Las tablas son ejemplos visuales; la conexión a una base de datos y las operaciones para administrar usuarios o productos todavía no forman parte de este proyecto.
